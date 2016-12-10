@@ -1,17 +1,27 @@
-FROM debian:jessie
-MAINTAINER Andrew Scorpil "dev@scorpil.com"
+FROM debian:stretch
+MAINTAINER Bobby Powers "bobbypowers@gmail.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && \
-    apt-get install \
-       ca-certificates \
-       curl \
-       gcc \
-       libc6-dev \
-       -qqy \
-       --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+RUN \
+  apt-get update -qq -y && \
+  apt-get upgrade -qq -y && \
+  apt-get install -qq -y --no-install-recommends \
+    ca-certificates \
+    curl \
+    software-properties-common \
+    vim \
+    emacs-nox \
+    less \
+    htop \
+    man \
+    lsb-release \
+    build-essential \
+    make \
+    git \
+    z3 \
+    python-all && \
+  rm -rf /var/lib/apt/lists/*
 
 ENV RUST_ARCHIVE=rust-nightly-x86_64-unknown-linux-gnu.tar.gz
 ENV RUST_DOWNLOAD_URL=https://static.rust-lang.org/dist/$RUST_ARCHIVE
